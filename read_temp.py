@@ -6,11 +6,10 @@ import struct
 import sys
 import datetime
 
-#
 __author__ = 'Tony Lin'
 
+#Open the serial port at 115200 baud
 ser = serial.Serial('/dev/pts/40',  115200, timeout = 1)    #Open the serial port at 115200 baud
-
 #init serial
 ser.flush()
 f = open ('output.csv', 'a')
@@ -44,7 +43,6 @@ while True:
         f.closed
         time.sleep(1)
 
-#       break
     except IndexError:
         print("Unable to read")
     except KeyboardInterrupt:
