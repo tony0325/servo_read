@@ -13,7 +13,7 @@ ser = serial.Serial(ec_pty,  115200, timeout = 3)
 ser.flush()
 ser.write('aps\n') # Turn off the AP.
 f = open ('output.csv', 'a')
-f.write('Time, Vin, Battery voltage, Battery current, Battery capacity, Efficiency\n')
+f.write('Time, USBC input voltage, Battery voltage, Battery current, Battery capacity, Efficiency\n')
 while True:
     try:
         while True:
@@ -70,6 +70,9 @@ while True:
             if P_USBC == 0:
                 print('[Error] Input power is 0, please check!')
                 sys.exit('[Error] Sorry, goodbye!')
+            if battery_capacity == 100:
+                print('Battery is 100%')
+                sys.exit('Check the out in output.csv')
             else:
                 efficiency = (P_BAT + P_SYS) / P_USBC * 100
                 print('The efficiency is: %.2f %%\n' % efficiency)
